@@ -1,55 +1,98 @@
 //import useState to use hooks
 import React, { useState } from "react"
 
-import { Container, Typography, Card, Grid, TextField, Button } from "@material-ui/core"
+import {
+	Container, Typography, Card, Grid, TextField, Button,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogContentText,
+	DialogTitle,
+
+
+} from "@material-ui/core"
 
 import styles from "./style"
 
-import { MovieIcon } from "../../icons"
-
 export default (props) => {
-	console.log(props)
-	//inciamos el hook use state para usar estados dentro de componentes funcionales
-	//using object decontrustion we separate searchtext (the value of the state, in this case an empty string) and setSearchText (callback funcion used to set the new value of the state)
-	const [searchText, setSearchText] = useState("")
 
 	const classes = styles()
 
-	const handleSearchTextChange = e => {
-		setSearchText(e.target.value)
+
+	const [showLoginModal, setShowLoginModal] = useState(false)
+	const [showSignupModal, setShowSignupModal] = useState(false)
+
+
+	const [user, setUser] = useState({
+		username: "",
+		password: ""
+	})
+
+	const toggleLogin = e => {
+		setShowLoginModal(!showLoginModal)
 	}
 
-	const handleCleanTextClick = e => {
-		setSearchText("")
+	const toggleSignup = e => {
+		setShowSignupModal(!showSignupModal)
 	}
-	const handleSearchTextClick = e => {
-		props.history.push(`/results?movieName=${searchText}`)
+
+	const handleChange = e => {
+		setUser({ ...user, [e.target.name]: e.target.value })
 	}
+
+	const handleSubmit = e => {
+		e.preventDefault()
+
+	}
+
+
+
+
 	return (
 		<Container className={classes.container}>
 
-			<Card className={classes.cardContainer}>
-				<Grid container className={classes.titleGridContainer} >
-					<Grid>
-						<Typography className={classes.title}>Bienvenido</Typography>
-					</Grid>
-					<Grid>
-						<MovieIcon className={classes.movieIcon} />
-					</Grid>
-				</Grid>
-				<TextField
-					value={searchText}
-					placeholder="Buscar..."
-					className={classes.textFieldSearch}
-					onChange={handleSearchTextChange}
-				/>
-				<Grid className={classes.buttonsContainer}>
-					<Button variant="contained" onClick={handleCleanTextClick} >clean</Button>
-					<Button variant="contained" className={classes.searchButton} color="primary" onClick={handleSearchTextClick} > search</Button>
-				</Grid>
 
-			</Card>
+			<Grid className={classes.buttonsContainer}>
+				<Button variant="contained" onClick={toggleLogin} >Login</Button>
+				<Button variant="contained" onClick={toggleSignup} >Signup</Button>
+			</Grid>
 
+
+			<Dialog open={showLoginModal} onClose={toggleLogin} aria-labelledby="form-dialog-title">
+				<DialogTitle id="form-dialog-title">Login</DialogTitle>
+				<DialogContent>
+
+					<TextField
+						autoFocus
+						margin="dense"
+						id="username"
+						name="username"
+						label="Username"
+						type="text"
+						fullWidth
+						onChange={handleChange}
+					/>
+					<TextField
+						autoFocus
+						margin="dense"
+						id="password"
+						name="password"
+						label="Password"
+						type="password"
+						fullWidth
+						onChange={handleChange}
+
+					/>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={toggleLogin} color="primary">
+						Cancel
+          </Button>
+					<Button onClick={toggleLogin} color="primary">
+						Login
+          </Button>
+				</DialogActions>
+			</Dialog>
 		</Container>
 
 
