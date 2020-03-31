@@ -31,6 +31,7 @@ export default function (state = initialState, action) {
         case SEARCH_MOVIE_BY_ID_COMPLETE:
             return { ...state, isLoading: false, movieResult: action.movie.data }
             break;
+
         default:
             return { ...state }
     }

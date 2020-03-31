@@ -5,3 +5,7 @@ export const isSearchLoading = state => get(state, "search.isLoading")
 export const movieResults = state => get(state, "search.movieResults.Search")
 
 export const movieResult = state => get(state, "search.movieResult")
+
+export const loggedUser = state => get(state, "authReducers.loggedUser")
+
+export const todoList = state => get(state, "todoReducers.todoList")

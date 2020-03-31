@@ -7,6 +7,7 @@ import Results from "./pages/Results/index"
 
 import Home from './pages/Home';
 import MovieDetails from "./pages/MovieDetail"
+import Todos from "./pages/Todo/Todo"
 
 
 const App = ({ store }) => (
@@ -16,6 +17,7 @@ const App = ({ store }) => (
 				<Route exact path="/" component={Home} />
 				<Route path="/results" component={Results} />
 				<Route path="/movie/:id" component={MovieDetails} />
+				<Route path="/todos" component={Todos} />
 			</div>
 		</Router>
 	</Provider>

@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
-import search from './search';
+import authReducers from './auth.reducer';
+import todoReducers from './todo.reducer';
+
 
 const rootReducer = combineReducers({
-	search
+	authReducers,
+	todoReducers
 });
 
 export default rootReducer;
