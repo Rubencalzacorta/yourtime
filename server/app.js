@@ -17,6 +17,7 @@ require('./configs/session.config')(app)
 // Base URLS
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/todo', require('./routes/todo.routes'))
+app.use('/api/user', require('./routes/user.routes'))
 
 
 module.exports = app;

@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   username: String,
-  password: String
+  password: String,
+  todos: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Todo'
+  }]
 }, {
   timestamps: {
     createdAt: 'created_at',

@@ -1,11 +1,18 @@
 const express = require('express');
-const authRoutes = express.Router();
+const router = express.Router();
 
-const passport = require('passport');
-const bcrypt = require('bcryptjs');
+const User = require('../models/User')
+const Todo = require('../models/Todo')
 
-const User = require('../models/User.model')
-const Todo = require('../models/Todo.model')
+router.post("/newtodo", (req, res, next) => {
+
+    Todo.create(req.body)
+        .then(newTodo => {
+            res.status(200).json(newTodo)
+        })
+        .catch(err => console.log("problema creando el todo", err))
+
+})
 
 
-module.exports = authRoutes;
+module.exports = router;

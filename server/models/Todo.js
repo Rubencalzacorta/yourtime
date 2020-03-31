@@ -3,14 +3,18 @@ const Schema = mongoose.Schema;
 
 const todoSchema = new Schema({
   name: String,
-  type: {
+  creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  category: {
     type: String,
     enum: ['Work', 'Study', "Personal Project", "Workout", "Fun", "Reading"]
   },
   time: Number,
   status: {
     type: String,
-    enum: ['ToDo', 'Doing', "Done"]
+    enum: ['Todo', 'Doing', "Done"]
   },
   beginingDate: Date,
   endDate: Date
@@ -21,5 +25,5 @@ const todoSchema = new Schema({
   }
 });
 
-const Todo = mongoose.model('Todo', TodoSchema);
+const Todo = mongoose.model('Todo', todoSchema);
 module.exports = Todo;
