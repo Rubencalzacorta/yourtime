@@ -11,6 +11,9 @@ class authServices {
 
     addTodo = (id) => this.service.post("/addtodo", { id }).then(response => response.data)
 
+    removeTodo = (id) => this.service.post("/removetodo", { id }).then(response => response.data)
+
+
     getUser = () => this.service.get("/getuser").then(response => response.data)
 
     // login = ({ username, password }) => this.service.post("/login", { username, password }).then(response => response.data)

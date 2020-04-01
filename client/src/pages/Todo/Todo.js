@@ -6,11 +6,12 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    MenuItem
+    MenuItem,
+    CircularProgress
 
 } from "@material-ui/core"
 
-import { setLoggedUser } from "../../redux/actions/search"
+import { setLoggedUser, setUserTodoList } from "../../redux/actions/search"
 
 import { useDispatch, useSelector } from "react-redux"
 
@@ -22,6 +23,7 @@ import styles from "./style"
 import TodoServices from "../../Services/todo.services"
 import UserServices from "../../Services/user.services"
 
+import TodoCard from "../../components/TodoCard/TodoCard"
 
 const category = ['Work', 'Study', "Personal Project", "Workout", "Fun", "Reading"]
 
@@ -74,7 +76,10 @@ export default (props) => {
         e.preventDefault()
         todoServices.newTodo(newTodo)
             .then(returnedTodo => userServices.addTodo(returnedTodo._id))
-            .then(user => dispatch(setLoggedUser({ user })))
+            .then(user => {
+                dispatch(setLoggedUser({ user }))
+                dispatch(setUserTodoList({ todos: user.todos }))
+            })
             .catch(err => console.log("RC error creado el todo en el front", err))
             .then(() => {
                 resetNewTodo()
@@ -82,16 +87,32 @@ export default (props) => {
             })
     }
 
+    const renderTodos = (status) => {
+        if (TodoList) {
+            return TodoList.map((elm, idx) => elm.status === status && <TodoCard key={idx} {...elm} />)
+        } else {
+            return <CircularProgress size={50} color="primary" />
+        }
 
-
-
+    }
 
     return (
         <Container className={classes.container}>
 
-
             <Grid className={classes.buttonsContainer}>
                 <Button variant="contained" onClick={toggleAddTodo} >Add Todo</Button>
+            </Grid>
+
+            <Grid style={{ backgroundColor: "yellow" }}>
+                {renderTodos("Doing")}
+            </Grid>
+
+            <Grid style={{ backgroundColor: "green" }} >
+                {renderTodos("Todo")}
+            </Grid>
+
+            <Grid style={{ backgroundColor: "red" }} >
+                {renderTodos("Done")}
             </Grid>
 
 
