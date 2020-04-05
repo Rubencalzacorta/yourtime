@@ -11,6 +11,8 @@ import {
 
 } from "@material-ui/core"
 
+import "./home.css"
+
 import { setLoggedUser } from "../../redux/actions/search"
 import { setUserTodoList } from "../../redux/actions/search"
 
@@ -107,16 +109,20 @@ export default ({ history }) => {
 
 
 	return (
-		<Container className={classes.container}>
+		<main className="home-container">
 
 
-			<Grid className={classes.buttonsContainer}>
-				<Button variant="contained" onClick={toggleLogin} >Login</Button>
-				<Button variant="contained" onClick={toggleSignup} >Signup</Button>
-				<Button variant="contained" onClick={handleLogout} >logOut</Button>
+			<div className="buttons-container">
+				<button variant="contained" onClick={toggleLogin} >Login</button>
 
-			</Grid>
+				<h1>To Doing</h1>
+				<p>Timed to do list</p>
 
+				<button variant="contained" onClick={toggleSignup} >Signup</button>
+
+			</div>
+
+			{/* <button variant="contained" onClick={handleLogout} >logOut</button> */}
 
 			<Dialog open={showLoginModal} onClose={toggleLogin} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Login</DialogTitle>
@@ -195,7 +201,7 @@ export default ({ history }) => {
 
 
 
-		</Container>
+		</main>
 
 
 	)

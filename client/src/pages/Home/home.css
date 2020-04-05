@@ -1,0 +1,26 @@
+
+   .home-container{
+        height: 100vh;
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url("../../images/d511ce029edd7821931446e4bd7266bd.jpg");
+        background-position: center;
+    }
+
+
+   .buttons-container{
+        height: 80%;
+        width: 100%;
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url("../../images/d511ce029edd7821931446e4bd7266bd.jpg");
+        background-position: center;
+    }
+
+
+
+

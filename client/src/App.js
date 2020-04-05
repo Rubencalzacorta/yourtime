@@ -9,6 +9,8 @@ import Home from './pages/Home';
 import MovieDetails from "./pages/MovieDetail"
 import Todos from "./pages/Todo/Todo"
 
+import "./App.css"
+
 
 const App = ({ store }) => (
 	<Provider store={store}>

@@ -12,45 +12,12 @@ export default makeStyles({
     container: {
         height: "100vh",
         flexDirection: "column",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundImage: `url(../../../../../images/d511ce029edd7821931446e4bd7266bd.jpg)`
 
-        ...centeredStyleObj
     },
-
-    cardContainer: {
-
-        flexDirection: "column",
-        width: 400,
-        height: 200,
-        padding: "2rem",
-
-        ...centeredStyleObj
-    },
-
-
-    title: {
-        fontSize: "4rem"
-    },
-
-    titleGridContainer: {
-        ...centeredStyleObj
-    },
-
-    textFieldSearch: {
-        width: "90%"
-    },
-
-    searchButton: {
-        marginLeft: ".5rem"
-    },
-
-    buttonsContainer: {
-        marginTop: ".5rem"
-    },
-
-    movieIcon: {
-        fontSize: "4rem",
-        marginLeft: 10
-    }
 
 
 

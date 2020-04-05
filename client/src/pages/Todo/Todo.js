@@ -41,16 +41,18 @@ export default ({ history }) => {
     const [showTodoModal, setShowTodoModal] = useState(false)
 
 
-    const mapStateToProps = state => {
-        return {
-            User: useSelector(state => loggedUser(state))
-        }
-    }
+    // const mapStateToProps = state => {
+    //     return {
+    //         User: useSelector(state => loggedUser(state))
+    //     }
+    // }
 
 
 
     let User = useSelector(state => loggedUser(state))
     let TodoList = useSelector(state => todoList(state))
+
+    console.log(TodoList)
 
     useEffect(() => {
 
