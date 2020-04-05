@@ -16,7 +16,7 @@ const todoSchema = new Schema({
     type: String,
     enum: ['Todo', 'Doing', "Done"]
   },
-  beginingDate: Date,
+  beginningDate: Date,
   endDate: Date
 }, {
   timestamps: {

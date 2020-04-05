@@ -19,5 +19,7 @@ app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/todo', require('./routes/todo.routes'))
 app.use('/api/user', require('./routes/user.routes'))
 
+require("./javascripts/timer")
+
 
 module.exports = app;

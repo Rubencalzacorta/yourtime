@@ -22,45 +22,71 @@ import styles from "./style"
 
 import TodoServices from "../../Services/todo.services"
 import UserServices from "../../Services/user.services"
+import AuthServices from "../../Services/auth.services"
 
 import TodoCard from "../../components/TodoCard/TodoCard"
 
 const category = ['Work', 'Study', "Personal Project", "Workout", "Fun", "Reading"]
 
-export default (props) => {
+export default ({ history }) => {
 
     const todoServices = new TodoServices()
     const userServices = new UserServices()
+    const authServices = new AuthServices()
 
     const dispatch = useDispatch()
 
     const classes = styles()
 
-    const User = useSelector(state => loggedUser(state))
-    const TodoList = useSelector(state => todoList(state))
-
-    console.log(User)
-    console.log(TodoList)
-
     const [showTodoModal, setShowTodoModal] = useState(false)
 
+
+    const mapStateToProps = state => {
+        return {
+            User: useSelector(state => loggedUser(state))
+        }
+    }
+
+
+
+    let User = useSelector(state => loggedUser(state))
+    let TodoList = useSelector(state => todoList(state))
+
+    useEffect(() => {
+
+        if (!User) {
+            authServices.loggedin()
+                .then(() => userServices.getUser())
+                .then(user => {
+                    dispatch(setLoggedUser({ user }))
+                    dispatch(setUserTodoList({ todos: user.todos }))
+                })
+                .catch(err => {
+                    console.log("RC error checking user in todos", err)
+                    history.push("/")
+                })
+        }
+
+    }, [TodoList])
+
+
     const [newTodo, setNewTodo] = useState({
-        creator: User._id,
+        creator: User ? User._id : undefined,
         name: "",
         category: "",
         time: 0,
         status: 'Todo',
-        beginingDate: null,
+        beginningDate: null,
         endDate: null
     })
 
     const resetNewTodo = () => setNewTodo({
-        creator: User._id,
+        creator: User ? User._id : undefined,
         name: "",
         category: "",
         time: 0,
         status: 'Todo',
-        beginingDate: null,
+        beginningDate: null,
         endDate: null
     })
 
@@ -89,12 +115,14 @@ export default (props) => {
 
     const renderTodos = (status) => {
         if (TodoList) {
-            return TodoList.map((elm, idx) => elm.status === status && <TodoCard key={idx} {...elm} />)
+            return TodoList.map((elm, idx) => elm.status === status && <TodoCard key={idx} {...elm} idx={idx} />)
         } else {
             return <CircularProgress size={50} color="primary" />
         }
 
     }
+
+
 
     return (
         <Container className={classes.container}>

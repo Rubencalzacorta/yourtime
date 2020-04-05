@@ -2,7 +2,8 @@ import {
     SEARCH_MOVIE_START,
     SEARCH_MOVIE_BY_ID_START,
     SET_LOGGED_USER,
-    SET_USER_TODO_LIST
+    SET_USER_TODO_LIST,
+    UPDATE_DOING,
 } from "../../consts/actionTypes"
 
 export const searchMovie = payload => ({
@@ -22,6 +23,11 @@ export const setLoggedUser = payload => ({
 
 export const setUserTodoList = payload => ({
     type: SET_USER_TODO_LIST,
+    payload,
+})
+
+export const updateDoing = payload => ({
+    type: UPDATE_DOING,
     payload,
 })
 
