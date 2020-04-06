@@ -52,8 +52,6 @@ export default ({ history }) => {
     let User = useSelector(state => loggedUser(state))
     let TodoList = useSelector(state => todoList(state))
 
-    console.log(TodoList)
-
     useEffect(() => {
 
         if (!User) {

@@ -15,16 +15,15 @@ export default function (state = initialState, action) {
 
             const idx = action.payload.idx
             const time = action.payload.time
-            const todoList = JSON.parse(JSON.stringify([state.todoList]))
-            const updatedTodo = todoList[idx]
+
+            const newTodo = [...state.todoList]
+
+            const updatedTodo = newTodo[idx]
             updatedTodo.time = time
 
-            console.log(state.todoList)
-            todoList.splice(idx, 1, updatedTodo)
-            console.log(todoList)
+            newTodo.splice(idx, 1, updatedTodo)
 
-            console.log({ ...state, todoList })
-            return { ...state, todoList }
+            return { ...state, todoList: newTodo }
 
             break;
         default:

@@ -94,10 +94,9 @@ const TodoCard = ({ _id, name, time, category, status, beginningDate, endDate, i
     useEffect(() => {
 
         if (status === "Doing" && !timer) {
-            console.log(time)
             const interval = setInterval(() => {
-                dispatch(updateDoing({ idx, time: time + 1 }))
-                console.log(time)
+                time++
+                dispatch(updateDoing({ idx, time }))
             }, 1000)
 
             setTimerInterval(interval)
