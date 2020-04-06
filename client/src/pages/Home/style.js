@@ -19,6 +19,10 @@ export default makeStyles({
 
     },
 
+    darkerbackground: {
+        backgroundColor: "rgba(0,0,0, 0.5)"
+    }
+
 
 
 })

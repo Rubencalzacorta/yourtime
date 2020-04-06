@@ -1,0 +1,67 @@
+.todo-card{
+    width: 90%;
+    margin-bottom: 20px;
+    padding: 5%;
+}
+
+.card-info{
+ margin: 10px 0 0 ;
+    font-size: 1.2rem;
+}
+
+.title-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+   
+}
+
+h5{
+    font-size: 1.4rem;
+}
+
+.title-wrapper > p{
+text-align: right;  
+font-size: 0.9rem; 
+}
+
+.task{
+    margin-top: 8px;
+    border-bottom: solid white 1px;
+    padding-bottom: 2px;
+}
+
+.icon{
+    background-color: black;
+    width: 50px;
+    height: 100px
+}
+
+.todo-controls{
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.doing{
+    background-color: rgb(66, 61, 255) ;
+    color: white;
+}
+
+.todo{
+    background-color: 	rgb(242, 255, 90);
+    color:rgb(111, 134, 67)
+}
+
+.done{
+    background-color: rgb(207, 3, 181) ;
+    color: white
+}
+
+.play-time{
+    color: rgb(78, 219, 255)
+}
+
+
+

@@ -131,15 +131,15 @@ export default ({ history }) => {
                 <Button variant="contained" onClick={toggleAddTodo} >Add Todo</Button>
             </Grid>
 
-            <Grid style={{ backgroundColor: "yellow" }}>
+            <Grid style={{ width: "100%" }}>
                 {renderTodos("Doing")}
             </Grid>
 
-            <Grid style={{ backgroundColor: "green" }} >
+            <Grid style={{ width: "100%" }}>
                 {renderTodos("Todo")}
             </Grid>
 
-            <Grid style={{ backgroundColor: "red" }} >
+            <Grid style={{ width: "100%" }}>
                 {renderTodos("Done")}
             </Grid>
 

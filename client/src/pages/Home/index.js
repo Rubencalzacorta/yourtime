@@ -109,22 +109,22 @@ export default ({ history }) => {
 
 
 	return (
-		<main className="home-container">
+		<main className="home-container centered-items">
 
 
-			<div className="buttons-container">
-				<button variant="contained" onClick={toggleLogin} >Login</button>
-
-				<h1>To Doing</h1>
-				<p>Timed to do list</p>
-
-				<button variant="contained" onClick={toggleSignup} >Signup</button>
+			<div className="buttons-container centered-items">
+				<button className="link" onClick={toggleSignup} >Signup</button>
+				<div className="centered-text">
+					<h1>to doing</h1>
+					<p>Timed to do list</p>
+				</div>
+				<button className="button" onClick={toggleLogin} >Login</button>
 
 			</div>
 
 			{/* <button variant="contained" onClick={handleLogout} >logOut</button> */}
 
-			<Dialog open={showLoginModal} onClose={toggleLogin} aria-labelledby="form-dialog-title">
+			<Dialog className={classes.darkerBackground} overlayStyle={{ backgroundColor: 'transparent' }} open={showLoginModal} onClose={toggleLogin} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Login</DialogTitle>
 				<DialogContent>
 

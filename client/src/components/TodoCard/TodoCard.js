@@ -12,12 +12,17 @@ import { useDispatch, useSelector } from "react-redux"
 
 import { updateDoing } from "../../redux/actions/search"
 
+import "./TodoCard.css"
+
 import {
     PlayFilledIcon,
     // PlayEmptyIcon,
     PauseIcon,
     CheckIcon,
-    CancelIcon
+    CancelIcon,
+    RecordingOff,
+    RecordingOn,
+    More
 } from "../../icons/index"
 
 import TodoServices from "../../Services/todo.services"
@@ -107,34 +112,38 @@ const TodoCard = ({ _id, name, time, category, status, beginningDate, endDate, i
 
 
     return (
-        <Card className={classes.cardContainer} >
-            <Grid container onClick={handleCardClick}>
-                <Grid item className={classes.titleContainer}>
+        <div className={`todo-card ${status === "Todo" ? "todo" : status === "Doing" ? "doing" : "done"}`} >
+            <div container className="card-info" >
+                <div item className="title-wrapper">
+                    <h5>{status}</h5>
+                    <p className={`${status === "Doing" && "play-time"}`}> {status === "Doing" ? "live" : "time"} <br /> {time}</p>
+                </div>
+                <div className="task">
+                    <p>{name}</p>
+                </div>
+                <div className="todo-controls">
+                    <div className="secundary-controls">
+                        {todoOptions ?
+                            <>
+                                <CheckIcon onClick={() => handleStatusClick("Done")} />
+                                <CancelIcon onClick={handleDeleteClick} />
+                                <More style={{ width: 50, height: 50 }} onClick={handleCardClick} />
+                            </>
+                            :
+                            <More style={{ width: 50, height: 50 }} onClick={handleCardClick} />
 
-                    <Typography>{name}</Typography>
-                    <Typography>Time: {time}</Typography>
+                        }
+                    </div>
 
-                </Grid>
+                    <div className="primary-controls">
+                        {status != "Doing" ? <RecordingOff style={{ width: 50, height: 50 }} onClick={() => handleStatusClick("Doing")} /> : <RecordingOn style={{ width: 50, height: 50 }} onClick={() => handleStatusClick("Todo")} />}
+                    </div>
 
-            </Grid>
+                </div>
 
-            {todoOptions &&
-                <Grid container>
-                    <Grid item className={classes.titleContainer}>
-                        <PlayFilledIcon onClick={() => handleStatusClick("Doing")} />
-                    </Grid>
-                    <Grid item className={classes.titleContainer}>
-                        <PauseIcon onClick={() => handleStatusClick("Todo")} />
-                    </Grid>
-                    <Grid item className={classes.titleContainer}>
-                        <CheckIcon onClick={() => handleStatusClick("Done")} />
-                    </Grid>
-                    <Grid item className={classes.titleContainer}>
-                        <CancelIcon onClick={handleDeleteClick} />
-                    </Grid>
-                </Grid>
-            }
-        </Card>
+            </div>
+
+        </div>
 
 
     )

@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/styles"
+import { FormHelperText } from "@material-ui/core"
 
 export default makeStyles({
     cardContainer: {
@@ -10,6 +11,7 @@ export default makeStyles({
         width: 120
     },
     titleContainer: {
+        display: "flex",
         marginLeft: 20
     }
 })
