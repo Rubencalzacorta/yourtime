@@ -1,7 +1,7 @@
 .todo-card{
     width: 90%;
     margin-bottom: 20px;
-    padding: 5%;
+    padding: 1% 5%;
 }
 
 .card-info{
@@ -32,6 +32,10 @@ font-size: 0.9rem;
     padding-bottom: 2px;
 }
 
+.task.todo{
+    border-bottom: solid  rgb(111, 134, 67) 1px;
+}
+
 .icon{
     background-color: black;
     width: 50px;
@@ -44,6 +48,17 @@ font-size: 0.9rem;
     justify-content: space-between;
 }
 
+.secundary-controls{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.secundary-controls > *{
+margin-right: 8px;
+}
+
 .doing{
     background-color: rgb(66, 61, 255) ;
     color: white;
@@ -51,7 +66,7 @@ font-size: 0.9rem;
 
 .todo{
     background-color: 	rgb(242, 255, 90);
-    color:rgb(111, 134, 67)
+    color:rgb(111, 134, 67);
 }
 
 .done{
@@ -61,6 +76,10 @@ font-size: 0.9rem;
 
 .play-time{
     color: rgb(78, 219, 255)
+}
+
+.time{
+    font-weight: 600;
 }
 
 

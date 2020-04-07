@@ -11,12 +11,16 @@ import {
 
 } from "@material-ui/core"
 
+import "./Todo.css"
+
 import { setLoggedUser, setUserTodoList } from "../../redux/actions/search"
 
 import { useDispatch, useSelector } from "react-redux"
 
 import { loggedUser } from "../../redux/selectors/index"
 import { todoList } from "../../redux/selectors/index"
+
+import Add from "../../icons/Add"
 
 import styles from "./style"
 
@@ -25,6 +29,7 @@ import UserServices from "../../Services/user.services"
 import AuthServices from "../../Services/auth.services"
 
 import TodoCard from "../../components/TodoCard/TodoCard"
+import NavBar from "../../components/Navbar/Navbar"
 
 const category = ['Work', 'Study', "Personal Project", "Workout", "Fun", "Reading"]
 
@@ -39,15 +44,6 @@ export default ({ history }) => {
     const classes = styles()
 
     const [showTodoModal, setShowTodoModal] = useState(false)
-
-
-    // const mapStateToProps = state => {
-    //     return {
-    //         User: useSelector(state => loggedUser(state))
-    //     }
-    // }
-
-
 
     let User = useSelector(state => loggedUser(state))
     let TodoList = useSelector(state => todoList(state))
@@ -125,74 +121,81 @@ export default ({ history }) => {
 
 
     return (
-        <Container className={classes.container}>
+        <>
 
-            <Grid className={classes.buttonsContainer}>
-                <Button variant="contained" onClick={toggleAddTodo} >Add Todo</Button>
-            </Grid>
-
-            <Grid style={{ width: "100%" }}>
-                {renderTodos("Doing")}
-            </Grid>
-
-            <Grid style={{ width: "100%" }}>
-                {renderTodos("Todo")}
-            </Grid>
-
-            <Grid style={{ width: "100%" }}>
-                {renderTodos("Done")}
-            </Grid>
+            <NavBar toggleAddTodo={toggleAddTodo} />
+            <Container className={classes.container}>
 
 
-            <Dialog open={showTodoModal} onClose={toggleAddTodo} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">New ToDo</DialogTitle>
-                <DialogContent>
+                <Grid className={classes.buttonsContainer}>
+                    <button className="button add-todo" button onClick={toggleAddTodo} >
+                        <Add style={{ height: 70, width: 70 }}></Add>
+                    </button>
+                </Grid>
 
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        name="name"
-                        label="name"
-                        type="text"
-                        fullWidth
-                        onChange={handleChange}
-                    />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="category"
-                        name="category"
-                        label="Choose a category"
-                        select
-                        value={newTodo.category}
-                        fullWidth
-                        onChange={handleChange}
+                <Grid style={{ width: "100%" }}>
+                    {renderTodos("Doing")}
+                </Grid>
 
-                    >
-                        {category.map((e, i) => {
-                            return (
-                                <MenuItem key={i} value={e}>
-                                    {e}
-                                </MenuItem>
-                            );
-                        })}
+                <Grid style={{ width: "100%" }}>
+                    {renderTodos("Todo")}
+                </Grid>
+
+                <Grid style={{ width: "100%" }}>
+                    {renderTodos("Done")}
+                </Grid>
 
 
-                    </TextField>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={toggleAddTodo} color="primary">
-                        Cancel
+                <Dialog open={showTodoModal} onClose={toggleAddTodo} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">New ToDo</DialogTitle>
+                    <DialogContent>
+
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            name="name"
+                            label="name"
+                            type="text"
+                            fullWidth
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="category"
+                            name="category"
+                            label="Choose a category"
+                            select
+                            value={newTodo.category}
+                            fullWidth
+                            onChange={handleChange}
+
+                        >
+                            {category.map((e, i) => {
+                                return (
+                                    <MenuItem key={i} value={e}>
+                                        {e}
+                                    </MenuItem>
+                                );
+                            })}
+
+
+                        </TextField>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={toggleAddTodo} color="primary">
+                            Cancel
           </Button>
-                    <Button onClick={handleAddTodoSubmit} color="primary">
-                        Create
+                        <Button onClick={handleAddTodoSubmit} color="primary">
+                            Create
           </Button>
-                </DialogActions>
-            </Dialog>
+                    </DialogActions>
+                </Dialog>
 
 
-        </Container>
+            </Container>
+        </>
 
 
     )

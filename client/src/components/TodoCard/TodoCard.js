@@ -42,7 +42,6 @@ const TodoCard = ({ _id, name, time, category, status, beginningDate, endDate, i
     const [todoOptions, setTodoOption] = useState(false)
     const [timer, setTimer] = useState(false)
     const [timerInterval, setTimerInterval] = useState(undefined)
-    const [timeToShow, setTimeToShow] = useState(time)
 
     const toggleTodoOptions = () => setTodoOption(!todoOptions)
 
@@ -64,13 +63,16 @@ const TodoCard = ({ _id, name, time, category, status, beginningDate, endDate, i
 
         if (status === "Done") {
             setEndDate()
+            stopInterval()
         }
 
         if (status === "Todo" && timerInterval) {
-            clearInterval(timerInterval)
+            stopInterval()
         }
 
     }
+
+    const stopInterval = () => clearInterval(timerInterval)
 
     const setBeginningDate = () => {
         const date = new Date()
@@ -110,23 +112,37 @@ const TodoCard = ({ _id, name, time, category, status, beginningDate, endDate, i
 
     })
 
+    const secondsToTime = (sec) => {
+
+        const dateObj = new Date(sec * 1000);
+        const hours = dateObj.getUTCHours();
+        const minutes = dateObj.getUTCMinutes();
+        const seconds = dateObj.getSeconds();
+
+        const timeString = hours.toString().padStart(2, '0') + ':' +
+            minutes.toString().padStart(2, '0') + ':' +
+            seconds.toString().padStart(2, '0');
+
+
+        return timeString
+    }
 
     return (
         <div className={`todo-card ${status === "Todo" ? "todo" : status === "Doing" ? "doing" : "done"}`} >
             <div container className="card-info" >
                 <div item className="title-wrapper">
                     <h5>{status}</h5>
-                    <p className={`${status === "Doing" && "play-time"}`}> {status === "Doing" ? "live" : "time"} <br /> {time}</p>
+                    <p className={`time ${status === "Doing" && "play-time"}`}> {status === "Doing" ? "live" : "time"} <br /> {secondsToTime(time)}</p>
                 </div>
-                <div className="task">
+                <div className={`task ${status === "Todo" && "todo"}`}>
                     <p>{name}</p>
                 </div>
                 <div className="todo-controls">
                     <div className="secundary-controls">
                         {todoOptions ?
                             <>
-                                <CheckIcon onClick={() => handleStatusClick("Done")} />
-                                <CancelIcon onClick={handleDeleteClick} />
+                                <CheckIcon style={{ width: 30, height: 30 }} onClick={() => handleStatusClick("Done")} />
+                                <CancelIcon style={{ width: 30, height: 30 }} onClick={handleDeleteClick} />
                                 <More style={{ width: 50, height: 50 }} onClick={handleCardClick} />
                             </>
                             :
