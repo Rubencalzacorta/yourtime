@@ -9,7 +9,7 @@ const todoSchema = new Schema({
   },
   category: {
     type: String,
-    enum: ['Work', 'Study', "Personal Project", "Workout", "Fun", "Reading"]
+    enum: ['Work', 'Study', "Personal Project", "Workout", "Fun", "Reading", "Urgent"]
   },
   time: Number,
   status: {

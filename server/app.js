@@ -19,7 +19,9 @@ app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/todo', require('./routes/todo.routes'))
 app.use('/api/user', require('./routes/user.routes'))
 
+//this is the timer JS
 require("./javascripts/timer")
 
+app.use((req, res) => { res.sendFile(__dirname + "/public/index.html"); })
 
 module.exports = app;

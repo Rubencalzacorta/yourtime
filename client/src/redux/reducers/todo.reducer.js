@@ -17,10 +17,8 @@ export default function (state = initialState, action) {
             const time = action.payload.time
 
             const newTodo = [...state.todoList]
-
             const updatedTodo = newTodo[idx]
             updatedTodo.time = time
-
             newTodo.splice(idx, 1, updatedTodo)
 
             return { ...state, todoList: newTodo }

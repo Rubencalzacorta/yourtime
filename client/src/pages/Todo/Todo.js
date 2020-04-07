@@ -20,7 +20,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { loggedUser } from "../../redux/selectors/index"
 import { todoList } from "../../redux/selectors/index"
 
-
 import styles from "./style"
 
 import TodoServices from "../../Services/todo.services"
@@ -29,6 +28,7 @@ import AuthServices from "../../Services/auth.services"
 
 import TodoCard from "../../components/TodoCard/TodoCard"
 import NavBar from "../../components/Navbar/Navbar"
+import NewTodoModal from "../../components/Modals/NewTodoModal"
 
 const category = ['Work', 'Study', "Personal Project", "Workout", "Fun", "Reading"]
 
@@ -47,6 +47,8 @@ export default ({ history }) => {
     let User = useSelector(state => loggedUser(state))
     let TodoList = useSelector(state => todoList(state))
 
+
+    //if a user tries to reachto reach this endpoint, this will fetch the info and set the store, if not, redirects to home
     useEffect(() => {
 
         if (!User) {
@@ -62,7 +64,7 @@ export default ({ history }) => {
                 })
         }
 
-    }, [TodoList])
+    })
 
 
     const [newTodo, setNewTodo] = useState({
@@ -143,53 +145,7 @@ export default ({ history }) => {
                     {renderTodos("Done")}
                 </Grid>
 
-
-                <Dialog open={showTodoModal} onClose={toggleAddTodo} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">New ToDo</DialogTitle>
-                    <DialogContent>
-
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            name="name"
-                            label="name"
-                            type="text"
-                            fullWidth
-                            onChange={handleChange}
-                        />
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="category"
-                            name="category"
-                            label="Choose a category"
-                            select
-                            value={newTodo.category}
-                            fullWidth
-                            onChange={handleChange}
-
-                        >
-                            {category.map((elm, i) => {
-                                return (
-                                    <MenuItem key={i} value={elm}>
-                                        {elm}
-                                    </MenuItem>
-                                );
-                            })}
-
-
-                        </TextField>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={toggleAddTodo} color="primary">
-                            Cancel
-                         </Button>
-                        <Button onClick={handleAddTodoSubmit} color="primary">
-                            Create
-                        </Button>
-                    </DialogActions>
-                </Dialog>
+                <NewTodoModal showTodoModal={showTodoModal} toggleAddTodo={toggleAddTodo} handleChange={handleChange} handleAddTodoSubmit={handleAddTodoSubmit} newTodo={newTodo} category={category} />
 
 
             </Grid>

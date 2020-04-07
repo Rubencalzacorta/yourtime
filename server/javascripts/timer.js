@@ -2,6 +2,7 @@ const express = require('express');
 const Todo = require('../models/Todo')
 const router = express.Router();
 
+//every 2 seconds, this interval checks for todos that are being done and adds 2 seconds. 
 
 setInterval(() => {
 

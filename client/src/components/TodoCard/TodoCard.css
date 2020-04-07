@@ -14,11 +14,11 @@
     flex-direction: row;
     justify-content: space-between;
     
-   
 }
 
 h5{
     font-size: 1.4rem;
+    margin-right: 7px;
 }
 
 .title-wrapper > p{

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react"
 
 import {
-	Container, Grid, TextField, Button,
+	TextField, Button,
 	Dialog,
 	DialogActions,
 	DialogContent,
@@ -25,6 +25,9 @@ import styles from "./style"
 import AuthServices from "../../Services/auth.services"
 import UserServices from "../../Services/user.services"
 
+import SignupModal from "../../components/Modals/SignupModal"
+import LoginModal from "../../components/Modals/LoginModal"
+
 export default ({ history }) => {
 
 	const dispatch = useDispatch()
@@ -39,7 +42,8 @@ export default ({ history }) => {
 	const userServices = new UserServices()
 
 	useEffect(() => {
-		//only fires the dispatch accion when there is no movie list and when you have the name of the movie to look for 
+
+		//if the user is already logged goes directly to the todos endpoint and set the user on the store
 		if (!User && !userFetched) {
 			console.log("no Hay usuario")
 			setUserFetched(true)
@@ -55,7 +59,7 @@ export default ({ history }) => {
 		}
 	})
 
-
+	//modal toogles
 	const [showLoginModal, setShowLoginModal] = useState(false)
 	const [showSignupModal, setShowSignupModal] = useState(false)
 
@@ -77,8 +81,6 @@ export default ({ history }) => {
 		setUser({ ...user, [e.target.name]: e.target.value })
 	}
 
-	const handleLogout = () => authServices.logout().then(user => console.log("logout succesfull", user))
-
 	const handleLoginSubmit = e => {
 		e.preventDefault()
 		authServices.login({ username: user.username, password: user.password })
@@ -97,7 +99,7 @@ export default ({ history }) => {
 
 	const handleSignupSubmit = e => {
 		e.preventDefault()
-		authServices.Signup({ username: user.username, password: user.password })
+		authServices.signup({ username: user.username, password: user.password })
 			.then(user => console.log(user))
 			.then(() => {
 				toggleLogin()
@@ -107,11 +109,8 @@ export default ({ history }) => {
 	}
 
 
-
 	return (
 		<main className="home-container centered-items">
-
-
 			<div className="buttons-container centered-items">
 				<button className="link" onClick={toggleSignup} >Signup</button>
 				<div className="centered-text">
@@ -122,84 +121,9 @@ export default ({ history }) => {
 
 			</div>
 
-			{/* <button variant="contained" onClick={handleLogout} >logOut</button> */}
+			<LoginModal showLoginModal={showLoginModal} toggleLogin={toggleLogin} handleChange={handleChange} handleLoginSubmit={handleLoginSubmit} />
 
-			<Dialog className={classes.darkerBackground} overlayStyle={{ backgroundColor: 'transparent' }} open={showLoginModal} onClose={toggleLogin} aria-labelledby="form-dialog-title">
-				<DialogTitle id="form-dialog-title">Login</DialogTitle>
-				<DialogContent>
-
-					<TextField
-						autoFocus
-						margin="dense"
-						id="username"
-						name="username"
-						label="Username"
-						type="text"
-						fullWidth
-						onChange={handleChange}
-					/>
-					<TextField
-						autoFocus
-						margin="dense"
-						id="password"
-						name="password"
-						label="Password"
-						type="password"
-						fullWidth
-						onChange={handleChange}
-
-					/>
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={toggleLogin} color="primary">
-						Cancel
-          </Button>
-					<Button onClick={handleLoginSubmit} color="primary">
-						Login
-          </Button>
-				</DialogActions>
-			</Dialog>
-
-
-
-			<Dialog open={showSignupModal} onClose={toggleSignup} aria-labelledby="form-dialog-title">
-				<DialogTitle id="form-dialog-title">Signup</DialogTitle>
-				<DialogContent>
-
-					<TextField
-						autoFocus
-						margin="dense"
-						id="username"
-						name="username"
-						label="Username"
-						type="text"
-						fullWidth
-						onChange={handleChange}
-					/>
-					<TextField
-						autoFocus
-						margin="dense"
-						id="password"
-						name="password"
-						label="Password"
-						type="password"
-						fullWidth
-						onChange={handleChange}
-
-					/>
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={toggleSignup} color="primary">
-						Cancel
-          </Button>
-					<Button onClick={handleSignupSubmit} color="primary">
-						Signup
-          </Button>
-				</DialogActions>
-			</Dialog>
-
-
-
+			<SignupModal showSignupModal={showSignupModal} toggleSignup={toggleSignup} handleChange={handleChange} handleSignupSubmit={handleSignupSubmit} />
 
 		</main>
 

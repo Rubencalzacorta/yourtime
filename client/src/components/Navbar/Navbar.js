@@ -9,17 +9,13 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 
 const useStyles = makeStyles((theme) => ({
-
     title: {
         flexGrow: 1,
         textAlign: "right"
-
     },
-
-
 }));
 
-
+//function to make scroll hide from MUI
 function HideOnScroll(props) {
     const { children, window } = props;
     const trigger = useScrollTrigger({ target: window ? window() : undefined });
@@ -31,6 +27,7 @@ function HideOnScroll(props) {
     );
 }
 
+//also from MUI
 HideOnScroll.propTypes = {
     children: PropTypes.element.isRequired,
     window: PropTypes.func,
