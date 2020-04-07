@@ -3,7 +3,7 @@ import axios from "axios"
 class authServices {
     constructor() {
         this.service = axios.create({
-            baseURL: `http://localhost:5000/api/todo`,
+            baseURL: `${process.env.REACT_APP_URL}/todo`,
             withCredentials: true
         })
 
