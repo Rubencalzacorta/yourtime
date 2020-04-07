@@ -1,28 +1,27 @@
 import { makeStyles } from "@material-ui/styles"
 
-
+import img from "../../images/d511ce029edd7821931446e4bd7266bd.jpg"
 export default makeStyles({
 
     container: {
         height: "100vh",
-        flexDirection: "column",
-        justifyContent: "top",
-        display: "flex",
-        alignItems: "center",
-        marginTop: 10,
-        paddingTop: 70,
+        justifyContent: "center",
+        backgroundImage: `url(${img})`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "rgba(255,255,255,0.5)",
+        backgroundAttachment: "fixed",
+        paddingTop: 60,
+
 
     },
-
-    cardContainer: {
-
-        flexDirection: "column",
-        width: 400,
-        height: 200,
-        padding: "2rem",
+    todoWrapper: {
+        display: "inline",
+        margin: "0px 10px",
+        padding: 10,
+        backgroundColor: "rgba(0,0,0,.1)",
+        maxWidth: 300
 
     },
-
-
 
 })

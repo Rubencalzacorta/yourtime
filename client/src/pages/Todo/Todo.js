@@ -20,7 +20,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { loggedUser } from "../../redux/selectors/index"
 import { todoList } from "../../redux/selectors/index"
 
-import Add from "../../icons/Add"
 
 import styles from "./style"
 
@@ -118,30 +117,29 @@ export default ({ history }) => {
 
     }
 
+    const logOut = () => {
+        authServices.logout()
+        history.push("/")
+    }
+
 
 
     return (
         <>
 
-            <NavBar toggleAddTodo={toggleAddTodo} />
-            <Container className={classes.container}>
+            <NavBar toggleAddTodo={toggleAddTodo} logOut={logOut} />
+            <Grid container className={classes.container}>
 
 
-                <Grid className={classes.buttonsContainer}>
-                    <button className="button add-todo" button onClick={toggleAddTodo} >
-                        <Add style={{ height: 70, width: 70 }}></Add>
-                    </button>
-                </Grid>
-
-                <Grid style={{ width: "100%" }}>
+                <Grid className={classes.todoWrapper} xs={12} sm={3} >
                     {renderTodos("Doing")}
                 </Grid>
 
-                <Grid style={{ width: "100%" }}>
+                <Grid className={classes.todoWrapper} xs={12} sm={3} >
                     {renderTodos("Todo")}
                 </Grid>
 
-                <Grid style={{ width: "100%" }}>
+                <Grid className={classes.todoWrapper} xs={12} sm={3}>
                     {renderTodos("Done")}
                 </Grid>
 
@@ -172,10 +170,10 @@ export default ({ history }) => {
                             onChange={handleChange}
 
                         >
-                            {category.map((e, i) => {
+                            {category.map((elm, i) => {
                                 return (
-                                    <MenuItem key={i} value={e}>
-                                        {e}
+                                    <MenuItem key={i} value={elm}>
+                                        {elm}
                                     </MenuItem>
                                 );
                             })}
@@ -186,15 +184,15 @@ export default ({ history }) => {
                     <DialogActions>
                         <Button onClick={toggleAddTodo} color="primary">
                             Cancel
-          </Button>
+                         </Button>
                         <Button onClick={handleAddTodoSubmit} color="primary">
                             Create
-          </Button>
+                        </Button>
                     </DialogActions>
                 </Dialog>
 
 
-            </Container>
+            </Grid>
         </>
 
 
