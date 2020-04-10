@@ -1,5 +1,3 @@
-import { get } from "lodash"
-
 import {
     SET_USER_TODO_LIST, UPDATE_DOING
 } from "../../consts/actionTypes"

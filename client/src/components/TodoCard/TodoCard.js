@@ -17,17 +17,6 @@ import {
 import TodoServices from "../../Services/todo.services"
 import UserServices from "../../Services/user.services"
 
-
-const categoryColors = {
-    'Work': "#AED6F1",
-    'Study': "rgb(231, 76, 60 )",
-    "Personal Project": "#FCF3CF",
-    "Workout": "#F5CBA7",
-    "Fun": "#E5E7E9 ",
-    "Reading": "#A2D9CE",
-    "Urgent": "red"
-}
-
 const TodoCard = ({ _id, name, time, status, beginningDate, idx }) => {
 
     const dispatch = useDispatch()
@@ -73,14 +62,12 @@ const TodoCard = ({ _id, name, time, status, beginningDate, idx }) => {
     const setBeginningDate = () => {
         const date = new Date()
         todoServices.setBeginning(_id, date)
-            .then(response => console.log(response))
             .catch(err => console.log("error incluyendo la fecha de inicio", err))
     }
 
     const setEndDate = () => {
         const date = new Date()
         todoServices.setEnd(_id, date)
-            .then(response => console.log(response))
             .catch(err => console.log("error incluyendo la fecha de inicio", err))
     }
 

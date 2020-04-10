@@ -40,6 +40,13 @@ const LoginModal = (props) => {
                         onChange={props.handleChange}
 
                     />
+
+                    {props.errorMessage &&
+                        <div>
+                            <p style={{ color: "red", marginTop: 10, textAlign: "center" }}>{props.errorMessage}</p>
+                        </div>
+                    }
+
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={props.toggleLogin} color="primary">

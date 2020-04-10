@@ -1,16 +1,6 @@
 //import useState to use hooks
 import React, { useState, useEffect } from "react"
 
-import {
-	TextField, Button,
-	Dialog,
-	DialogActions,
-	DialogContent,
-	DialogTitle,
-
-
-} from "@material-ui/core"
-
 import "./home.css"
 
 import { setLoggedUser } from "../../redux/actions/search"
@@ -19,8 +9,6 @@ import { setUserTodoList } from "../../redux/actions/search"
 import { useDispatch, useSelector } from "react-redux"
 
 import { loggedUser } from "../../redux/selectors/index"
-
-import styles from "./style"
 
 import AuthServices from "../../Services/auth.services"
 import UserServices from "../../Services/user.services"
@@ -31,8 +19,6 @@ import LoginModal from "../../components/Modals/LoginModal"
 export default ({ history }) => {
 
 	const dispatch = useDispatch()
-
-	const classes = styles()
 
 	const User = useSelector(state => loggedUser(state))
 
@@ -45,7 +31,6 @@ export default ({ history }) => {
 
 		//if the user is already logged goes directly to the todos endpoint and set the user on the store
 		if (!User && !userFetched) {
-			console.log("no Hay usuario")
 			setUserFetched(true)
 			authServices.loggedin()
 				.then(user => userServices.getUser())
@@ -62,6 +47,7 @@ export default ({ history }) => {
 	//modal toogles
 	const [showLoginModal, setShowLoginModal] = useState(false)
 	const [showSignupModal, setShowSignupModal] = useState(false)
+	const [errorMessage, setErrorMessage] = useState("")
 
 	const [user, setUser] = useState({
 		username: "",
@@ -84,15 +70,22 @@ export default ({ history }) => {
 	const handleLoginSubmit = e => {
 		e.preventDefault()
 		authServices.login({ username: user.username, password: user.password })
-			.then(user => userServices.getUser())
 			.then(user => {
 
-				dispatch(setLoggedUser({ user }))
-				dispatch(setUserTodoList({ todos: user.todos }))
-			})
-			.then(() => {
-				toggleLogin()
-				history.push("/todos")
+				if (user.status === "failed") {
+					setErrorMessage(user.message)
+					console.log("pasa por failes")
+
+					return
+				} else {
+					userServices.getUser()
+						.then(gotUser => {
+							dispatch(setLoggedUser({ gotUser }))
+							dispatch(setUserTodoList({ todos: gotUser.todos }))
+							toggleLogin()
+							history.push("/todos")
+						})
+				}
 			})
 			.catch(err => console.log("RC error login in", err))
 	}
@@ -100,10 +93,16 @@ export default ({ history }) => {
 	const handleSignupSubmit = e => {
 		e.preventDefault()
 		authServices.signup({ username: user.username, password: user.password })
-			.then(user => console.log(user))
-			.then(() => {
-				toggleLogin()
-				history.push("/todos")
+			.then(user => {
+				//checking if signup was succesfull
+				if (user.status === "failed") {
+					setErrorMessage(user.message)
+
+				} else {
+					toggleLogin()
+					history.push("/todos")
+
+				}
 			})
 			.catch(err => console.log("RC error login in", err))
 	}
@@ -121,9 +120,9 @@ export default ({ history }) => {
 
 			</div>
 
-			<LoginModal showLoginModal={showLoginModal} toggleLogin={toggleLogin} handleChange={handleChange} handleLoginSubmit={handleLoginSubmit} />
+			<LoginModal showLoginModal={showLoginModal} toggleLogin={toggleLogin} handleChange={handleChange} handleLoginSubmit={handleLoginSubmit} errorMessage={errorMessage} />
 
-			<SignupModal showSignupModal={showSignupModal} toggleSignup={toggleSignup} handleChange={handleChange} handleSignupSubmit={handleSignupSubmit} />
+			<SignupModal showSignupModal={showSignupModal} toggleSignup={toggleSignup} handleChange={handleChange} handleSignupSubmit={handleSignupSubmit} errorMessage={errorMessage} />
 
 		</main>
 

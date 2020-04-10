@@ -12,14 +12,16 @@ authRoutes.post('/signup', (req, res, next) => {
   const password = req.body.password;
 
   if (!username || !password) {
-    res.status(400).json({
+    res.json({
+      status: "failed",
       message: 'Provide username and password'
     });
     return;
   }
 
   if (password.length < 7) {
-    res.status(400).json({
+    res.json({
+      status: "failed",
       message: 'Please make your password at least 8 characters long.'
     });
     return;
@@ -30,14 +32,17 @@ authRoutes.post('/signup', (req, res, next) => {
   }, (err, foundUser) => {
 
     if (err) {
-      res.status(500).json({
+      res.json({
+        status: "failed",
         message: "Username check went bad."
       });
       return;
     }
 
     if (foundUser) {
-      res.status(400).json({
+      res.json({
+        status: "failed",
+
         message: 'Username taken. Choose another one.'
       });
       return;
@@ -78,21 +83,26 @@ authRoutes.post('/signup', (req, res, next) => {
 authRoutes.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, theUser, failureDetails) => {
     if (err) {
-      res.status(500).json({
+      res.json({
+        status: "failed",
         message: 'Something went wrong authenticating user'
-      });
-      return;
+      })
+      return
     }
 
     if (!theUser) {
-      res.status(401).json(failureDetails);
+
+      res.json({
+        status: "failed",
+        message: 'Something is workng with the credentials, try again.'
+      })
       return;
     }
 
     req.login(theUser, (err) => {
       if (err) {
         res.status(500).json({
-          message: 'Session save went bad.'
+          message: 'Something went wrong authenticating user'
         });
         return;
       }

@@ -41,6 +41,14 @@ const SignupModal = (props) => {
                         onChange={props.handleChange}
 
                     />
+
+
+                    {props.errorMessage &&
+                        <div>
+                            <p style={{ color: "red", marginTop: 10, textAlign: "center" }}>{props.errorMessage}</p>
+                        </div>
+                    }
+
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={props.toggleSignup} color="primary">
@@ -49,6 +57,9 @@ const SignupModal = (props) => {
                     <Button onClick={props.handleSignupSubmit} color="primary">
                         Signup
           </Button>
+
+
+
                 </DialogActions>
             </Dialog>
 

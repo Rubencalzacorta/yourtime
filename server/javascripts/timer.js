@@ -8,10 +8,9 @@ setInterval(() => {
 
     Todo.find({ status: "Doing" })
         .then(allDoing => {
-
             allDoing.forEach((elm) => {
                 Todo.findByIdAndUpdate(elm._id, { $inc: { time: 2 } }, { new: true })
-                    .then(updated => console.log(updated))
+                    .then(updated => console.log("RC time updated on cards"))
                     .catch(err => console.log("RC error adding to time in the back"))
             })
         })
