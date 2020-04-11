@@ -4,10 +4,8 @@ class authServices {
     constructor() {
         this.service = axios.create({
             baseURL: `​https://apptodoing.herokuapp.com/api/todo`,  //process.env.REACT_APP_URL for development
-
             withCredentials: true
         })
-
     }
 
     newTodo = (todo) => this.service.post("/newtodo", todo).then(response => response.data)
