@@ -2,8 +2,9 @@ import axios from "axios"
 
 class authServices {
     constructor() {
+        this.REACT_APP_URL = process.env.REACT_APP_URL
         this.service = axios.create({
-            baseURL: `${process.env.REACT_APP_URL}/auth`,
+            baseURL: `​https://apptodoing.herokuapp.com/api/auth`,  //process.env.REACT_APP_URL
             withCredentials: true
         })
 

@@ -3,7 +3,8 @@ import axios from "axios"
 class authServices {
     constructor() {
         this.service = axios.create({
-            baseURL: `${process.env.REACT_APP_URL}/todo`,
+            baseURL: `​https://apptodoing.herokuapp.com/api/todo`,  //process.env.REACT_APP_URL for development
+
             withCredentials: true
         })
 
@@ -18,9 +19,6 @@ class authServices {
     setBeginning = (id, date) => this.service.post("/setbeginning", { id, date }).then(response => response.data)
 
     setEnd = (id, date) => this.service.post("/setend", { id, date }).then(response => response.data)
-
-
-    // loggedin = () => this.service.get('/loggedin').then(response => response.data)
 
 }
 
