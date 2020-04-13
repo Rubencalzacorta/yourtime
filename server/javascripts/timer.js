@@ -12,7 +12,7 @@ setInterval(() => {
             console.log("todos todo", allDoing)
             allDoing.forEach((elm) => {
                 console.log("previous element", elm)
-                Todo.findByIdAndUpdate(elm._id, { $inc: { time: 0 } }, { new: true })
+                Todo.findByIdAndUpdate(elm._id, { $inc: { time: 2 } }, { new: true })
                     .then(updated => console.log("updated element", updated))
                     .catch(err => console.log("RC error adding to time in the back", err))
             })
