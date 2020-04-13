@@ -8,14 +8,18 @@ setInterval(() => {
 
     Todo.find({ status: "Doing" })
         .then(allDoing => {
+            console.log("longitud de los todo", allDoing.length)
+            console.log("todos todo", allDoing)
             allDoing.forEach((elm) => {
-                Todo.findByIdAndUpdate(elm._id, { $inc: { time: 1 } }, { new: true })
-                    .catch(err => console.log("RC error adding to time in the back"))
+                console.log("previous element", elm)
+                Todo.findByIdAndUpdate(elm._id, { $inc: { time: 0 } }, { new: true })
+                    .then(updated => console.log("updated element", updated))
+                    .catch(err => console.log("RC error adding to time in the back", err))
             })
         })
         .catch(err => console.log("RC err looking for the doing", err))
 
-}, 1000)
+}, 2000)
 
 
 

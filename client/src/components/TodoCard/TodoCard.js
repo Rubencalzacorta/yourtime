@@ -82,17 +82,17 @@ const TodoCard = ({ _id, name, time, status, beginningDate }) => {
     //the the status is doing but the timer is false, then it starts the interval, 
     //saves its id on the state and turn sets timer to true
 
-    useEffect(() => {
-        if (status === "Doing" && !timer) {
-            const interval = setInterval(() => {
-                time++
-                dispatch(updateDoing({ _id, time }))
-            }, 1000)
+    // useEffect(() => {
+    //     if (status === "Doing" && !timer) {
+    //         const interval = setInterval(() => {
+    //             time++
+    //             dispatch(updateDoing({ _id, time }))
+    //         }, 1000)
 
-            setTimerInterval(interval)
-            setTimer(true)
-        }
-    })
+    //         setTimerInterval(interval)
+    //         setTimer(true)
+    //     }
+    // })
 
     //this functions turns seconds into HH:MM:SS format
     const secondsToTime = (sec) => {
