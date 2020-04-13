@@ -17,7 +17,7 @@ import {
 import TodoServices from "../../Services/todo.services"
 import UserServices from "../../Services/user.services"
 
-const TodoCard = ({ _id, name, time, status, beginningDate, idx }) => {
+const TodoCard = ({ _id, name, time, status, beginningDate }) => {
 
     const dispatch = useDispatch()
 
@@ -86,7 +86,7 @@ const TodoCard = ({ _id, name, time, status, beginningDate, idx }) => {
         if (status === "Doing" && !timer) {
             const interval = setInterval(() => {
                 time++
-                dispatch(updateDoing({ idx, time }))
+                dispatch(updateDoing({ _id, time }))
             }, 1000)
 
             setTimerInterval(interval)

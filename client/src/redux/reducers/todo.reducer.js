@@ -11,16 +11,18 @@ export default function (state = initialState, action) {
             break;
         case UPDATE_DOING:
 
-            const idx = action.payload.idx
+            const id = action.payload._id
             const time = action.payload.time
 
             const newTodo = [...state.todoList]
-            const updatedTodo = newTodo[idx]
+            const updatedTodo = newTodo.filter(elm => elm._id === id)[0]
+
+            const objectIndex = newTodo.indexOf(updatedTodo)
             updatedTodo.time = time
-            newTodo.splice(idx, 1, updatedTodo)
+
+            newTodo.splice(objectIndex, 1, updatedTodo)
 
             return { ...state, todoList: newTodo }
-
             break;
         default:
             return { ...state }
