@@ -20,7 +20,7 @@ app.use('/api/todo', require('./routes/todo.routes'))
 app.use('/api/user', require('./routes/user.routes'))
 
 //this is the timer JS
-require("./bin/timer")
+// require("./bin/timer")
 
 app.use((req, res) => { res.sendFile("./public/index.html"); })
 
