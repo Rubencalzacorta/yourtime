@@ -12,7 +12,8 @@ setInterval(() => {
             console.log("todos todo", allDoing)
             allDoing.forEach((elm) => {
                 console.log("previous element", elm)
-                Todo.findByIdAndUpdate(elm._id, { $inc: { time: 2 } }, { new: true })
+                //for some reason i need to get a hold on, the todo gets duplicate added time (but not duplicate loop as the console.logs do not show. )
+                Todo.findByIdAndUpdate(elm._id, { $inc: { time: 1 } }, { new: true })
                     .then(updated => console.log("updated element", updated))
                     .catch(err => console.log("RC error adding to time in the back", err))
             })
